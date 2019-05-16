@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PfcModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contrasenya">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdUsuari" Type="int" Nullable="false" />
+          <Property Name="Contrasenya" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dieta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomUsuari" Type="int" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Import" Type="money" Nullable="false" />
+          <Property Name="Tipus" Type="int" Nullable="false" />
+          <Property Name="Estat" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstatDieta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Estat" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipusDieta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Tipus" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cognom1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cognom2" Type="varchar" MaxLength="50" />
+          <Property Name="NomUsuari" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Contrasenya_Usuari">
+          <End Role="Usuari" Type="Self.Usuari" Multiplicity="1" />
+          <End Role="Contrasenya" Type="Self.Contrasenya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuari">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contrasenya">
+              <PropertyRef Name="IdUsuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dieta_Estat">
+          <End Role="EstatDieta" Type="Self.EstatDieta" Multiplicity="1" />
+          <End Role="Dieta" Type="Self.Dieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstatDieta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dieta">
+              <PropertyRef Name="Estat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dieta_Tipus">
+          <End Role="TipusDieta" Type="Self.TipusDieta" Multiplicity="1" />
+          <End Role="Dieta" Type="Self.Dieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipusDieta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dieta">
+              <PropertyRef Name="Tipus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dieta_Usuari">
+          <End Role="Usuari" Type="Self.Usuari" Multiplicity="1" />
+          <End Role="Dieta" Type="Self.Dieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuari">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dieta">
+              <PropertyRef Name="NomUsuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuari_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+          <End Role="Usuari" Type="Self.Usuari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuari">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuari_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuari" Type="Self.Usuari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuari">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdUsuari">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Rol1" Type="Self.Rol" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rol1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PfcModelStoreContainer">
+          <EntitySet Name="Contrasenya" EntityType="Self.Contrasenya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dieta" EntityType="Self.Dieta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstatDieta" EntityType="Self.EstatDieta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipusDieta" EntityType="Self.TipusDieta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuari" EntityType="Self.Usuari" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Contrasenya_Usuari" Association="Self.FK_Contrasenya_Usuari">
+            <End Role="Usuari" EntitySet="Usuari" />
+            <End Role="Contrasenya" EntitySet="Contrasenya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dieta_Estat" Association="Self.FK_Dieta_Estat">
+            <End Role="EstatDieta" EntitySet="EstatDieta" />
+            <End Role="Dieta" EntitySet="Dieta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dieta_Tipus" Association="Self.FK_Dieta_Tipus">
+            <End Role="TipusDieta" EntitySet="TipusDieta" />
+            <End Role="Dieta" EntitySet="Dieta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dieta_Usuari" Association="Self.FK_Dieta_Usuari">
+            <End Role="Usuari" EntitySet="Usuari" />
+            <End Role="Dieta" EntitySet="Dieta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuari_Empresa" Association="Self.FK_Usuari_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Usuari" EntitySet="Usuari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuari_Rol" Association="Self.FK_Usuari_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuari" EntitySet="Usuari" />
+          </AssociationSet>
+          <AssociationSet Name="IdUsuari" Association="Self.IdUsuari">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Rol1" EntitySet="Rol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PfcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Contrasenya">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuari" Type="Int32" Nullable="false" />
+          <Property Name="Contrasenya1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Usuari" Relationship="Self.FK_Contrasenya_Usuari" FromRole="Contrasenya" ToRole="Usuari" />
+        </EntityType>
+        <EntityType Name="Dieta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NomUsuari" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Import" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Tipus" Type="Int32" Nullable="false" />
+          <Property Name="Estat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstatDieta" Relationship="Self.FK_Dieta_Estat" FromRole="Dieta" ToRole="EstatDieta" />
+          <NavigationProperty Name="TipusDieta" Relationship="Self.FK_Dieta_Tipus" FromRole="Dieta" ToRole="TipusDieta" />
+          <NavigationProperty Name="Usuari" Relationship="Self.FK_Dieta_Usuari" FromRole="Dieta" ToRole="Usuari" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuari" Relationship="Self.FK_Usuari_Empresa" FromRole="Empresa" ToRole="Usuari" />
+        </EntityType>
+        <EntityType Name="EstatDieta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Estat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Dieta" Relationship="Self.FK_Dieta_Estat" FromRole="EstatDieta" ToRole="Dieta" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuari" Relationship="Self.FK_Usuari_Rol" FromRole="Rol" ToRole="Usuari" />
+          <NavigationProperty Name="Rol1" Relationship="Self.IdUsuari" FromRole="Rol" ToRole="Rol1" />
+          <NavigationProperty Name="Rol2" Relationship="Self.IdUsuari" FromRole="Rol1" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="TipusDieta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Tipus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Dieta" Relationship="Self.FK_Dieta_Tipus" FromRole="TipusDieta" ToRole="Dieta" />
+        </EntityType>
+        <EntityType Name="Usuari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cognom1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cognom2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomUsuari" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contrasenya" Relationship="Self.FK_Contrasenya_Usuari" FromRole="Usuari" ToRole="Contrasenya" />
+          <NavigationProperty Name="Dieta" Relationship="Self.FK_Dieta_Usuari" FromRole="Usuari" ToRole="Dieta" />
+          <NavigationProperty Name="Empresa" Relationship="Self.FK_Usuari_Empresa" FromRole="Usuari" ToRole="Empresa" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Usuari_Rol" FromRole="Usuari" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK_Contrasenya_Usuari">
+          <End Role="Usuari" Type="Self.Usuari" Multiplicity="1" />
+          <End Role="Contrasenya" Type="Self.Contrasenya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuari">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contrasenya">
+              <PropertyRef Name="IdUsuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dieta_Estat">
+          <End Role="EstatDieta" Type="Self.EstatDieta" Multiplicity="1" />
+          <End Role="Dieta" Type="Self.Dieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstatDieta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dieta">
+              <PropertyRef Name="Estat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dieta_Tipus">
+          <End Role="TipusDieta" Type="Self.TipusDieta" Multiplicity="1" />
+          <End Role="Dieta" Type="Self.Dieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipusDieta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dieta">
+              <PropertyRef Name="Tipus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dieta_Usuari">
+          <End Role="Usuari" Type="Self.Usuari" Multiplicity="1" />
+          <End Role="Dieta" Type="Self.Dieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuari">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dieta">
+              <PropertyRef Name="NomUsuari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuari_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+          <End Role="Usuari" Type="Self.Usuari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuari">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuari_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuari" Type="Self.Usuari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuari">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdUsuari">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Rol1" Type="Self.Rol" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rol1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PfcEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contrasenya" EntityType="Self.Contrasenya" />
+          <EntitySet Name="Dieta" EntityType="Self.Dieta" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" />
+          <EntitySet Name="EstatDieta" EntityType="Self.EstatDieta" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="TipusDieta" EntityType="Self.TipusDieta" />
+          <EntitySet Name="Usuari" EntityType="Self.Usuari" />
+          <AssociationSet Name="FK_Contrasenya_Usuari" Association="Self.FK_Contrasenya_Usuari">
+            <End Role="Usuari" EntitySet="Usuari" />
+            <End Role="Contrasenya" EntitySet="Contrasenya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dieta_Estat" Association="Self.FK_Dieta_Estat">
+            <End Role="EstatDieta" EntitySet="EstatDieta" />
+            <End Role="Dieta" EntitySet="Dieta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dieta_Tipus" Association="Self.FK_Dieta_Tipus">
+            <End Role="TipusDieta" EntitySet="TipusDieta" />
+            <End Role="Dieta" EntitySet="Dieta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dieta_Usuari" Association="Self.FK_Dieta_Usuari">
+            <End Role="Usuari" EntitySet="Usuari" />
+            <End Role="Dieta" EntitySet="Dieta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuari_Empresa" Association="Self.FK_Usuari_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Usuari" EntitySet="Usuari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuari_Rol" Association="Self.FK_Usuari_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuari" EntitySet="Usuari" />
+          </AssociationSet>
+          <AssociationSet Name="IdUsuari" Association="Self.IdUsuari">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Rol1" EntitySet="Rol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PfcModelStoreContainer" CdmEntityContainer="PfcEntities">
+          <EntitySetMapping Name="Contrasenya">
+            <EntityTypeMapping TypeName="PfcModel.Contrasenya">
+              <MappingFragment StoreEntitySet="Contrasenya">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUsuari" ColumnName="IdUsuari" />
+                <ScalarProperty Name="Contrasenya1" ColumnName="Contrasenya" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dieta">
+            <EntityTypeMapping TypeName="PfcModel.Dieta">
+              <MappingFragment StoreEntitySet="Dieta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcio" ColumnName="Descripcio" />
+                <ScalarProperty Name="NomUsuari" ColumnName="NomUsuari" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Import" ColumnName="Import" />
+                <ScalarProperty Name="Tipus" ColumnName="Tipus" />
+                <ScalarProperty Name="Estat" ColumnName="Estat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="PfcModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstatDieta">
+            <EntityTypeMapping TypeName="PfcModel.EstatDieta">
+              <MappingFragment StoreEntitySet="EstatDieta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Estat" ColumnName="Estat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="PfcModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipusDieta">
+            <EntityTypeMapping TypeName="PfcModel.TipusDieta">
+              <MappingFragment StoreEntitySet="TipusDieta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tipus" ColumnName="Tipus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuari">
+            <EntityTypeMapping TypeName="PfcModel.Usuari">
+              <MappingFragment StoreEntitySet="Usuari">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Cognom1" ColumnName="Cognom1" />
+                <ScalarProperty Name="Cognom2" ColumnName="Cognom2" />
+                <ScalarProperty Name="NomUsuari" ColumnName="NomUsuari" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="064839b9cfc146daa3820e412bc715d2" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="PfcModel.Contrasenya" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PfcModel.Dieta" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PfcModel.Empresa" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PfcModel.EstatDieta" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PfcModel.Rol" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PfcModel.TipusDieta" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PfcModel.Usuari" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="PfcModel.FK_Contrasenya_Usuari" ManuallyRouted="false" />
+        <AssociationConnector Association="PfcModel.FK_Dieta_Estat" ManuallyRouted="false" />
+        <AssociationConnector Association="PfcModel.FK_Dieta_Tipus" ManuallyRouted="false" />
+        <AssociationConnector Association="PfcModel.FK_Dieta_Usuari" ManuallyRouted="false" />
+        <AssociationConnector Association="PfcModel.FK_Usuari_Empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="PfcModel.FK_Usuari_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="PfcModel.IdUsuari" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

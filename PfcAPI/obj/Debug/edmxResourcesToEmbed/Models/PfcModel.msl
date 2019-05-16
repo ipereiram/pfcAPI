@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PfcModelStoreContainer" CdmEntityContainer="PfcEntities">
+    <EntitySetMapping Name="Contrasenya">
+      <EntityTypeMapping TypeName="PfcModel.Contrasenya">
+        <MappingFragment StoreEntitySet="Contrasenya">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdUsuari" ColumnName="IdUsuari" />
+          <ScalarProperty Name="Contrasenya1" ColumnName="Contrasenya" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dieta">
+      <EntityTypeMapping TypeName="PfcModel.Dieta">
+        <MappingFragment StoreEntitySet="Dieta">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcio" ColumnName="Descripcio" />
+          <ScalarProperty Name="NomUsuari" ColumnName="NomUsuari" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Import" ColumnName="Import" />
+          <ScalarProperty Name="Tipus" ColumnName="Tipus" />
+          <ScalarProperty Name="Estat" ColumnName="Estat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresa">
+      <EntityTypeMapping TypeName="PfcModel.Empresa">
+        <MappingFragment StoreEntitySet="Empresa">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatDieta">
+      <EntityTypeMapping TypeName="PfcModel.EstatDieta">
+        <MappingFragment StoreEntitySet="EstatDieta">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Estat" ColumnName="Estat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rol">
+      <EntityTypeMapping TypeName="PfcModel.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipusDieta">
+      <EntityTypeMapping TypeName="PfcModel.TipusDieta">
+        <MappingFragment StoreEntitySet="TipusDieta">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Tipus" ColumnName="Tipus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuari">
+      <EntityTypeMapping TypeName="PfcModel.Usuari">
+        <MappingFragment StoreEntitySet="Usuari">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Cognom1" ColumnName="Cognom1" />
+          <ScalarProperty Name="Cognom2" ColumnName="Cognom2" />
+          <ScalarProperty Name="NomUsuari" ColumnName="NomUsuari" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
