@@ -69,29 +69,14 @@ namespace PfcAPI.Controllers
         {
             try
             {
-                Dieta dieta = dietaService.GetDieta(id);
+                Dieta dieta = dietaService.GetExpense(id);
                 return dieta;
             }
             catch (Exception)
             {
                 return null;
             }
-        }
-
-        [HttpPost]
-        [Route("AddDieta")]
-        public void AddDieta([FromBody] JObject json)
-        {
-            try
-            {
-                Dieta request = JsonConvert.DeserializeObject<Dieta>(json.ToString());
-                dietaService.AddDieta(request);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+        }        
 
         [HttpGet]
         [Route("GetEstatDietaById")]
@@ -120,6 +105,111 @@ namespace PfcAPI.Controllers
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        [HttpPost]
+        [Route("AddDieta")]
+        public void AddDieta([FromBody] JObject json)
+        {
+            try
+            {
+                Dieta request = JsonConvert.DeserializeObject<Dieta>(json.ToString());
+                dietaService.AddExpense(request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("UpdateDieta")]
+        public void UpdateDieta([FromBody] JObject json)
+        {
+            try
+            {
+                Dieta request = JsonConvert.DeserializeObject<Dieta>(json.ToString());
+                dietaService.UpdateExpense(request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("SaveDieta")]
+        public void SaveDieta([FromBody] JObject json)
+        {
+            try
+            {
+                Dieta request = JsonConvert.DeserializeObject<Dieta>(json.ToString());
+                dietaService.SaveExpense(request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("AcceptDieta")]
+        public void AcceptDieta([FromBody] JObject json)
+        {
+            try
+            {
+                Dieta request = JsonConvert.DeserializeObject<Dieta>(json.ToString());
+                dietaService.AcceptExpense(request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("RefuseDieta")]
+        public void RefuseDieta([FromBody] JObject json)
+        {
+            try
+            {
+                Dieta request = JsonConvert.DeserializeObject<Dieta>(json.ToString());
+                dietaService.RefuseExpense(request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("SetPendingPayDieta")]
+        public void SetPendingPayDieta([FromBody] JObject json)
+        {
+            try
+            {
+                Dieta request = JsonConvert.DeserializeObject<Dieta>(json.ToString());
+                dietaService.SetPendingPayExpense(request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("PayDieta")]
+        public void PayDieta([FromBody] JObject json)
+        {
+            try
+            {
+                Dieta request = JsonConvert.DeserializeObject<Dieta>(json.ToString());
+                dietaService.PayExpense(request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
